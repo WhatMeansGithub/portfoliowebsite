@@ -1,6 +1,10 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
+import { BloomPass } from 'three/examples/jsm/postprocessing/BloomPass';
+
 
 // Setup
 
@@ -36,6 +40,11 @@ const controls = new OrbitControls(camera, renderer.domElement);
 
 const pointLight = new THREE.PointLight(0xffffff, 1); // White light with intensity 1
 scene.add(pointLight); // Add a single point light to the scene
+
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+
+
 
 function addStar() {
     const geometry = new THREE.SphereGeometry(0.25, 24, 24);
